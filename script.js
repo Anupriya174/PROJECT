@@ -1,40 +1,36 @@
-let problems = [];
+let problems=[];
+function addProblem(){
+  const name=document.getElementById("problemName").value;
+  const difficulty=document.getElementById("difficulty").value;
 
-function addProblem() {
-  const name = document.getElementById("problemName").value;
-  const difficulty = document.getElementById("difficulty").value;
-
-  if (name === "") return;
+  if(name==="") return ;
 
   problems.push({
-    name: name,
-    difficulty: difficulty,
-    solved: false
+    name:name,
+    difficulty:difficulty,
+    solved:false
   });
 
-  document.getElementById("problemName").value = "";
+document.getElementById("problemName").value="";
+displayProblems();
+}
+function toggleSolved(index){
+  problems[index].solved=!problems[index].solved;
   displayProblems();
 }
+function displayProblems(){
+  const list=document.getElementById("problemList");
+  list.innerHTML="";
 
-function toggleSolved(index) {
-  problems[index].solved = !problems[index].solved;
-  displayProblems();
-}
+  problems.forEach((problem,index)=>{
+    const li=document.createElement("li");
 
-function displayProblems() {
-  const list = document.getElementById("problemList");
-  list.innerHTML = "";
-
-  problems.forEach((problem, index) => {
-    const li = document.createElement("li");
-
-    li.innerHTML = `
+    li.innerHTML=`
       ${problem.name} - ${problem.difficulty}
       <button onclick="toggleSolved(${index})">
-        ${problem.solved ? "Solved" : "Unsolved"}
+        ${problem.solved ? "Solved" : "Unolved"}
       </button>
-    `;
-
+      `;
     list.appendChild(li);
   });
 }
